@@ -12,12 +12,15 @@
     "sails-mongo": "~0.9.7"
   },
   "scripts": {
-    "start": "node app.js",
-    "debug": "node debug app.js"
+    "start": "node .app.js",
+    "debug": "node debug .app.js"
   },
-  "main": "app.js",
-  "repository": "",
-  "author": "",
+  "main": ".app.js",
+  "repository": {
+      "type": "git",
+      "url": "git://github.com/joevanwanzeele/BareMarket.git"
+  },
+  "author": "joe.vanwanzeele@gmail.com",
   "license": "",
   "subdomain": "undefined-BareMarket",
   "engines": {
