@@ -1,0 +1,2 @@
+# BareMarket
+### a Sails application
