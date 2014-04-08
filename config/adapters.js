@@ -36,4 +36,25 @@ module.exports.adapters = {
   //   password: 'YOUR_MYSQL_PASSWORD',
   //   database: 'YOUR_MYSQL_DB'
   // }
+
+  'default': 'mongo',
+
+  // mongo: {
+  //   module   : 'sails-mongo',
+  //   host     : 'localhost',
+  //   user     : '',
+  //   password : '',
+  //   database : 'bareMarket',
+  //   schema   : true
+  // }
+
+  mongo: {
+    module   : 'sails-mongo',
+    host     : 'troup.mongohq.com',
+    user     : 'nodejitsu',
+    password : '89a9734c5ab5840b7f7cb831d9f2a04a',
+    database : 'baremarket',
+    port     : '10031',
+    schema   : true
+  
 };
