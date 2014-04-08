@@ -1,7 +1,7 @@
 {
   "name": "BareMarket",
   "private": true,
-  "version": "0.0.0-1",
+  "version": "0.0.0-2",
   "description": "a Sails application",
   "dependencies": {
     "sails": "0.9.15",
@@ -17,12 +17,12 @@
   },
   "main": "app.js",
   "repository": {
-      "type": "git",
-      "url": "git://github.com/joevanwanzeele/BareMarket.git"
+    "type": "git",
+    "url": "git://github.com/joevanwanzeele/BareMarket.git"
   },
   "author": "joe.vanwanzeele@gmail.com",
   "license": "",
-  "subdomain": "undefined-BareMarket",
+  "subdomain": "QA-BareMarket",
   "engines": {
     "node": "0.10.x"
   }
