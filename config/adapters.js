@@ -39,22 +39,13 @@ module.exports.adapters = {
 
   'default': 'mongo',
 
-  // mongo: {
-  //   module   : 'sails-mongo',
-  //   host     : 'localhost',
-  //   user     : '',
-  //   password : '',
-  //   database : 'bareMarket',
-  //   schema   : true
-  // }
-
   mongo: {
     module   : 'sails-mongo',
-    host     : 'troup.mongohq.com',
-    user     : 'nodejitsu',
-    password : '89a9734c5ab5840b7f7cb831d9f2a04a',
-    database : 'baremarket',
+    host     : process.env.MONGO_HOST || 'localhost',
+    user     : process.env.MONGO_USER || '',
+    password : process.env.MONGO_PASSWD || '',
+    database : process.env.MONGO_DBNAME || 'baremarket',
     port     : '10031',
     schema   : true
-  
+  }
 };
