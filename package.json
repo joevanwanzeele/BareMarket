@@ -1,7 +1,7 @@
 {
   "name": "BareMarket",
   "private": true,
-  "version": "0.0.0-7",
+  "version": "0.0.0-10",
   "description": "a Sails application",
   "dependencies": {
     "sails": "0.9.15",
@@ -23,7 +23,7 @@
   },
   "author": "joe.vanwanzeele@gmail.com",
   "license": "",
-  "subdomain": "qa-baremarket",
+  "subdomain": "baremarket",
   "engines": {
     "node": "0.10.x"
   }
