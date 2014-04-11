@@ -12,8 +12,23 @@ module.exports = {
 
   attributes: {
 
-    name: {
+    firstName: {
+      type: 'string',
+      required: true
+    },
+
+    lastName: {
+      type: 'string',
+      required: true
+    },
+
+    companyName: {
       type: 'string'
+    },
+
+    userName: {
+      type: 'string',
+      required: true,
     },
 
   	email: {
@@ -21,6 +36,35 @@ module.exports = {
       email: true,
       required: true,
       unique: true
+    },
+
+    address: {
+      type: 'string',
+      required: true
+    },
+
+    city: {
+      type: 'string',
+      required: true
+    },
+
+    state: {
+      type: 'string',
+      required: true
+    },
+
+    zip: {
+      type: 'string',
+      required: true
+    },
+
+    country: {
+      type: 'string',
+      required: true
+    },
+
+    phoneNumber: {
+      type: 'string'
     },
 
     online: {
@@ -35,15 +79,7 @@ module.exports = {
 
     encryptedPassword: {
       type: 'string'
-    },
-
-    // toJSON: function(){
-    //     var obj = this.toObject();
-    //     delete obj.password;
-    //     delete obj.confirmation;
-    //     delete obj._csrf;
-    //     return obj;
-    // }
+    }
   },
 
   beforeValidation: function(values, next){
