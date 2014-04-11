@@ -92,7 +92,7 @@ module.exports = {
     var userId = req.session.User.id;
 
     User.findOne(userId, function(err, user){
-
+      if (user){
         User.update(userId, {online: false}, function(err){
           if (err) return next(err);
 
@@ -106,6 +106,12 @@ module.exports = {
           req.session.destroy();
           res.redirect('/session/new');
         });
+      }
+      else {
+        req.session.destroy();
+
+        res.redirect('/session/new');
+      }
     });
   },
 
