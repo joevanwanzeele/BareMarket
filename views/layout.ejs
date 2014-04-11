@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%- title %></title>
+    <title>Bare Market</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -62,10 +62,12 @@
         <ul class="nav navbar-nav">
           <% if (session.authenticated) { %>
             <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.name %> </a> </li>
+            <li><a href="/saleItem">Buy Something</a></li
+            <li><a href="/saleItem/create/">Sell Something</a></li>
             <% } %>
             <% if (session.authenticated && session.User.admin) { %>
-            <li><a href="/user">Administration</a></li>
-            <li><a href="#">Placeholder2</a></li>
+            <li><a href="/user">User Administration</a></li>
+
           <% } %>
         </ul>
         <div class="navbar-right">
