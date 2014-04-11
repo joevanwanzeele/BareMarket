@@ -32,6 +32,18 @@
     <link rel="stylesheet" href="/linker/styles/bootstrap.min.css">
     <link rel="stylesheet" href="/linker/styles/custom.css">
     <!--STYLES END-->
+
+    <script type="text/javascript">
+      window.baremarket = { csrf: "<%= _csrf %>"};
+    </script>
+
+    <audio id="chatAudio">
+        <source src="/sounds/notify.ogg" type="audio/ogg">
+        <source src="/sounds/notify.mp3" type="audio/mpeg">
+        <source src="/sounds/notify.wav" type="audio/wav">
+          Your browser does not support HTML5 audio.
+    </audio>
+
   </head>
 
   <body>
@@ -112,7 +124,7 @@
     -->
 
     <!--TEMPLATES-->
-    
+    <script type="text/javascript" src="/jst.js"></script>
     <!--TEMPLATES END-->
 
 
@@ -146,6 +158,7 @@
     <script src="/linker/js/jquery.validate.min.js"></script>
     <script src="/linker/js/bootstrap.min.js"></script>
     <script src="/linker/js/customValidate.js"></script>
+    <script src="/linker/js/underscore-min.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>

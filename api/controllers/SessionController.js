@@ -68,6 +68,15 @@ module.exports = {
         user.save(function(err, user){
           if (err) return next(err);
 
+          // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in.
+          User.publishUpdate(user.id, {
+              loggedIn: true,
+              id: user.id,
+              name: user.name,
+              action: 'has logged in.'
+          });
+
+
           if (req.session.User.admin){
             res.redirect('/user');
             return;
@@ -87,6 +96,13 @@ module.exports = {
         User.update(userId, {online: false}, function(err){
           if (err) return next(err);
 
+          User.publishUpdate(user.id, {
+              loggedIn: false,
+              id: user.id,
+              name: user.name,
+              action: 'has signed out.'
+          });
+
           req.session.destroy();
           res.redirect('/session/new');
         });
@@ -99,6 +115,4 @@ module.exports = {
    * (specific to SessionController)
    */
   _config: {}
-
-
 };

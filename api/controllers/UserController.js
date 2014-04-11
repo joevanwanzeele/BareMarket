@@ -24,10 +24,16 @@ module.exports = {
 
   create: function(req, res, next){
 
-    User.create(req.params.all(), function userCreated(err, user){
+    var userObj = {
+      name: req.param('name'),
+      email: req.param('email'),
+      password: req.param('password'),
+      confirmation: req.param('confirmation')
+    }
+
+    User.create(userObj, function userCreated(err, user){
 
       if (err) {
-
         req.session.flash = { err: err };
 
         return res.redirect('/user/new');
@@ -40,6 +46,9 @@ module.exports = {
       user.online = true;
       user.save(function(err, user){
         if (err) return next(err);
+
+        user.action = "signed-up and logged-in.";
+        User.publishCreate(user);
 
         res.redirect('/user/show/'+user.id);
       });
@@ -87,6 +96,20 @@ module.exports = {
 
   update: function(req, res, next){
 
+    if (req.session.User.admin){
+      var userObj = {
+        name: req.param('name'),
+        email: req.param('email'),
+        admin: req.param('admin')
+      }
+    }
+    else{
+      var userObj = {
+        name: req.param('name'),
+        email: req.param('email')
+      }
+    }
+
     User.update(req.param('id'), req.params.all(), function userUpdated (err){
 
       if (err){
@@ -106,10 +129,34 @@ module.exports = {
 
       User.destroy(req.param('id'), function userDestroyed(err){
         if (err) return next(err);
+
+        User.publishUpdate(user.id, {
+          name: user.name,
+          action: 'has deleted their account.'
+        });
+        
+        User.publishDestroy(user.id);
+
       });
 
       res.redirect('/user');
     });
+  },
+
+  subscribe: function(req, res, next){
+
+    User.find(function foundUsers(err, users){
+      if (err) return next(err);
+
+      User.subscribe(req.socket);
+
+      User.subscribe(req.socket, users);
+
+      // This will avoid a warning from the socket for trying to render
+      // html over the socket
+      res.send(200);
+    });
+
   },
 
   /**

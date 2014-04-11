@@ -10,7 +10,7 @@
 
 (function (io) {
 
-  // as soon as this file is loaded, connect automatically, 
+  // as soon as this file is loaded, connect automatically,
   var socket = io.connect();
   if (typeof console !== 'undefined') {
     log('Connecting to Sails.js...');
@@ -19,27 +19,19 @@
   socket.on('connect', function socketConnected() {
 
     // Listen for Comet messages from Sails
-    socket.on('message', function messageReceived(message) {
+    socket.on('message', cometMessageReceivedFromServer);
 
-      ///////////////////////////////////////////////////////////
-      // Replace the following with your own custom logic
-      // to run when a new message arrives from the Sails.js
-      // server.
-      ///////////////////////////////////////////////////////////
-      log('New comet message received :: ', message);
-      //////////////////////////////////////////////////////
-
-    });
-
+    // Subscribe to the user model class room and instance room
+    socket.get('/user/subscribe');
 
     ///////////////////////////////////////////////////////////
     // Here's where you'll want to add any custom logic for
-    // when the browser establishes its socket connection to 
+    // when the browser establishes its socket connection to
     // the Sails.js server.
     ///////////////////////////////////////////////////////////
     log(
-        'Socket is now connected and globally accessible as `socket`.\n' + 
-        'e.g. to send a GET request to Sails, try \n' + 
+        'Socket is now connected and globally accessible as `socket`.\n' +
+        'e.g. to send a GET request to Sails, try \n' +
         '`socket.get("/", function (response) ' +
         '{ console.log(response); })`'
     );
@@ -60,7 +52,7 @@
       console.log.apply(console, arguments);
     }
   }
-  
+
 
 })(
 
@@ -69,3 +61,85 @@
   window.io
 
 );
+
+
+function cometMessageReceivedFromServer(message){
+
+  console.log("Here's the message: ", message);
+
+  // If it's a user model message
+  if (message.model === 'user'){
+    var userId = message.id;
+    updateUserInDom(userId, message);
+
+    if (message.verb !== "destroy"){
+      displayFlashActivity(message);
+    }
+  }
+}
+
+function displayFlashActivity(message){
+  $('#chatAudio')[0].play();
+  $('.navbar').after("<div class='alert alert-success'>"
+                      + message.data.name + " " + message.data.action 
+                    + "</div>");
+  $('.alert').fadeOut(5000);
+}
+
+function updateUserInDom(userId, message){
+
+  // What page am I on?
+  var page = document.location.pathname;
+
+  // strip trailing slash if we've got one
+  page = page.replace(/(\/)$/, '');
+
+  // Route to the appropriate user update handler based on which page you're on
+  switch (page){
+    // user admin page
+    case '/user':
+
+      if (message.verb === 'update'){
+        UserIndexPage.updateUser(userId, message);
+      }
+
+      if (message.verb === 'create'){
+        UserIndexPage.addUser(message);
+      }
+
+      if (message.verb === 'destroy'){
+        UserIndexPage.destroyUser(userId);
+      }
+      break;
+  }
+}
+
+var UserIndexPage = {
+
+  updateUser: function(id, message){
+    var $userRow = $('tr[data-id="' + id + '"] td img').first();
+    if (message.data.loggedIn){
+      $userRow.attr('src', "/images/icon-online.png");
+    } else {
+      $userRow.attr('src', "/images/icon-offline.png");
+    }
+  },
+
+  addUser: function(user){
+
+    var obj = {
+      user: user.data,
+      _csrf: window.baremarket.csrf || ''
+    };
+
+    $('tr:last').after(
+
+      // This is the path to the templates file
+      JST['assets/linker/templates/addUser.ejs']( obj )
+    );
+  },
+
+  destroyUser: function(id){
+    $('tr[data-id="' + id + '"]').remove();
+  }
+}
