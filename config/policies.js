@@ -29,7 +29,8 @@ module.exports.policies = {
   },
 
   saleItem: {
-    new: ["flash", "isAuthenticated"]
+    new: ["flash", "isAuthenticated"],
+    '*': "flash"
   }
 
   /*

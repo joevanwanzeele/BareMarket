@@ -34,8 +34,6 @@ module.exports = {
 
   create: function(req, res, next){
 
-    console.log(req);
-
     var saleItemObj = {
       postedByUserId: req.session.User.id,
       postedDate: new Date(),

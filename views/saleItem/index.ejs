@@ -12,7 +12,7 @@
       <tr data-id="<%= item.id %>" data-model="item">
         <td><%= item.title %></td>
         <td><%= item.description %></td>
-        <td><%= item.price %></td>
+        <td>$<%= item.price %></td>
         <td><a href="/saleitem/show/<%= item.id %>" class="btn btn-sm btn-primary">Show</a></td>
       </tr>
       <%  }) %>
