@@ -1,0 +1,20 @@
+<div class="container">
+  <h3>Things you may purchase</h3>
+  <table class="table">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+
+    <% _.each(items, function(item) {  %>
+      <tr data-id="<%= item.id %>" data-model="item">
+        <td><%= item.title %></td>
+        <td><%= item.description %></td>
+        <td><%= item.price %></td>
+        <td><a href="/saleitem/show/<%= item.id %>" class="btn btn-sm btn-primary">Show</a></td>
+      </tr>
+      <%  }) %>
+    </table>
+</div>

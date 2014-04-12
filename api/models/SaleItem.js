@@ -12,7 +12,7 @@ schema: true,
 
 attributes: {
 
-  postedById: {
+  postedByUserId: {
     type: 'string',
     required: true
   },
@@ -27,9 +27,17 @@ attributes: {
     required: true
   },
 
-  currentPrice: {
+  price: {
     type: 'float',
     required: true
+  },
+
+  category: {
+    type: 'string'
+  },
+
+  subCategory: {
+    type: 'string'
   },
 
   postedDate: {
@@ -40,8 +48,11 @@ attributes: {
   quantity: {
     type: 'int',
     required: true
-  }
-},
+  },
 
+  images: {
+    type: 'array'
+  }
+}
 
 };

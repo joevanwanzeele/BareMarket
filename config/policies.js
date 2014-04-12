@@ -26,6 +26,10 @@ module.exports.policies = {
     edit: "isSelectedUserOrAdmin",
     update: "isSelectedUserOrAdmin",
     '*': "isAdmin"
+  },
+
+  saleItem: {
+    new: ["flash", "isAuthenticated"]
   }
 
   /*

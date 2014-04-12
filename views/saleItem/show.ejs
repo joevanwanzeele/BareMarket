@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="jumbotron">
+    <ol class="breadcrumb">
+      <li><%= item.category %></li>
+      <li><%= item.subCategory %></li>
+    </ol>
+    <br/>
+    <h1><%= item.title %></h1>
+    <h2><%= item.description %></h2>
+    <br/>
+    <p>Price: </p><p><%= item.price %></p>
+    <p>Quantity: </p><p><%= item.quantity %></p>
+    <a href="/saleItem/buy" class="btn btn-lg btn-success">Get it!</a>
+  </div>
+</div>
