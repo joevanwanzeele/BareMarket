@@ -81,7 +81,7 @@ function cometMessageReceivedFromServer(message){
 function displayFlashActivity(message){
   $('#chatAudio')[0].play();
   $('.navbar').after("<div class='alert alert-success'>"
-                      + message.data.name + " " + message.data.action 
+                      + message.data.name + " " + message.data.action
                     + "</div>");
   $('.alert').fadeOut(5000);
 }
@@ -110,6 +110,8 @@ function updateUserInDom(userId, message){
       if (message.verb === 'destroy'){
         UserIndexPage.destroyUser(userId);
       }
+      break;
+    default:
       break;
   }
 }
