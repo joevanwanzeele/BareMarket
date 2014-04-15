@@ -52,6 +52,10 @@ attributes: {
 
   images: {
     type: 'array'
+  },
+
+  imageUrl: {
+    type: 'string' //this is just temporary for testing.. use images later.
   }
 }
 
