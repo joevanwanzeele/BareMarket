@@ -3,7 +3,7 @@ function s3_upload(){
   $('#progressbar-container').removeClass('hidden');
     var s3upload = new S3Upload({
         file_dom_selector: 'files',
-        s3_sign_put_url: '/saleitem/sign_s3',
+        s3_sign_put_url: '/saleItem/sign_s3',
         onProgress: function(percent, message) {
             //$('#status').html('Upload progress: ' + percent + '% ' + message);
             $('#uploadProgress').css('width',percent+"%");
