@@ -25,10 +25,19 @@ module.exports = {
   create: function(req, res, next){
 
     var userObj = {
-      name: req.param('name'),
       email: req.param('email'),
       password: req.param('password'),
-      confirmation: req.param('confirmation')
+      confirmation: req.param('confirmation'),
+      firstName: req.param('firstName'),
+      lastName: req.param('lastName'),
+      companyName: req.param('companyName'),
+      userName: req.param('userName'),
+      address: req.param('address'),
+      city: req.param('city'),
+      state: req.param('state'),
+      zip: req.param('zip'),
+      country: req.param('country'),
+      phoneNumber: req.param('phoneNumber')
     }
 
     User.create(userObj, function userCreated(err, user){
@@ -134,7 +143,7 @@ module.exports = {
           name: user.name,
           action: 'has deleted their account.'
         });
-        
+
         User.publishDestroy(user.id);
 
       });

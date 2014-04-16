@@ -64,7 +64,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <% if (session.authenticated) { %>
-            <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.name %> </a> </li>
+            <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.firstName %> </a> </li>
             <li><a href="/saleItem/">Buy Something</a></li>
             <li><a href="/saleItem/new/">Sell Something</a></li>
             <% } %>

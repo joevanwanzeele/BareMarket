@@ -98,7 +98,7 @@ module.exports = {
     var mime_type = req.query.s3_object_type;
 
     var now = new Date();
-    var expires = Math.ceil((now.getTime() + 60000)/1000); // 10 seconds from now
+    var expires = Math.ceil((now.getTime() + 60000)/1000); // 60 seconds from now
     var amz_headers = "x-amz-acl:public-read";
 
     var put_request = "PUT\n\n"+mime_type+"\n"+expires+"\n"+amz_headers+"\n/"+S3_BUCKET+"/"+object_name;
