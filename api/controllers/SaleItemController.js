@@ -104,8 +104,12 @@ module.exports = {
     var put_request = "PUT\n\n"+mime_type+"\n"+expires+"\n"+amz_headers+"\n/"+S3_BUCKET+"/"+object_name;
 
     var signature = crypto.createHmac('sha1', AWS_SECRET_KEY).update(put_request).digest('base64');
+
+    signature = signature.replace('+','%2B')
+                         .replace('/','%2F')
+                         .replace('=','%3D');
+                         
     signature = encodeURIComponent(signature.trim());
-    signature = signature.replace('%2B','+');
 
     var url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+object_name;
 
