@@ -1,7 +1,7 @@
 {
   "name": "BareMarket",
   "private": true,
-  "version": "0.0.0-44",
+  "version": "0.0.0-45",
   "description": "a Sails application",
   "dependencies": {
     "sails": "0.9.15",
@@ -13,7 +13,8 @@
     "bcrypt": "0.7.7",
     "crypto": "0.0.3",
     "node-uuid": "1.4.1",
-    "aws-sdk": "2.0.0-rc13"
+    "aws-sdk": "2.0.0-rc13",
+    "line-reader": "0.2.3"
   },
   "scripts": {
     "start": "node app.js",

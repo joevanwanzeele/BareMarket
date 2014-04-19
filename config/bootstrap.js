@@ -21,37 +21,33 @@ module.exports.bootstrap = function (cb) {
 
   //import categories
 
-  var fs = require('fs'),
-    readline = require('readline'),
-    stream = require('stream');
+  var lineReader = require('line-reader');
 
-  var instream = fs.createReadStream('./assets/taxonomy.en-US.txt');
-  var outstream = new stream;
-  outstream.readable = true;
-  outstream.writable = true;
+  console.log("--clearing old categories--\n");
 
-  var rl = readline.createInterface({
-      input: instream,
-      output: outstream,
-      terminal: false
+  Category.destroy({}).done(function(err){
+    if (err) { console.log(err); }
+    console.log("--cleared old categories--\n");
+    importCategories();
   });
 
-  rl.on('line', function(line) {
-      //console.log(line);
+  function importCategories(){
+    console.log("--Begin importing categories--\n");
+
+    lineReader.eachLine('./assets/taxonomy.en-US.txt', function(line, last){
       if (line.indexOf('Google_Product_Taxonomy_Version') == -1)
       {
         var obj = { categoryList: line.split(' > ') };
-        Category.create(obj, function categoryCreated(err, category){
-          console.log(err);
+        Category.create(obj, function(err, category){
+          if (err) {console.log(err);}
+          if (last){
+            console.log("--Loaded categories--\n");
+            cb();
+          }
         });
-        console.dir(obj.categoryList);
       }
-
-
-  });
-
-  cb();
-
+    });
+  }
   // It's very important to trigger this callack method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
 
