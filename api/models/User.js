@@ -13,13 +13,11 @@ module.exports = {
   attributes: {
 
     firstName: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     lastName: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     companyName: {
@@ -27,8 +25,7 @@ module.exports = {
     },
 
     userName: {
-      type: 'string',
-      required: true,
+      type: 'string'
     },
 
   	email: {
@@ -39,28 +36,23 @@ module.exports = {
     },
 
     address: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     city: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     state: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     zip: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     country: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     phoneNumber: {
@@ -77,13 +69,18 @@ module.exports = {
       defaultsTo: false
     },
 
+    verified: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
     encryptedPassword: {
       type: 'string'
     }
   },
 
   beforeValidation: function(values, next){
-    
+
     if (typeof values.admin !== 'undefined'){
       if (values.admin === 'unchecked'){
         values.admin = false;
